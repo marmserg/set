@@ -24,6 +24,7 @@
             <div v-if="deck.length > 0" class="info">
                 <p>Осталось карт: {{ deck.length }}</p>
                 <p>Карт на столе: {{ cardsOnBoardCount }}</p>
+                <p @click="showSet">Сетов на столе: {{ setsOnBoard.length }}</p>
                 <p>Набрано очков: {{ score }}</p>
             </div>
             <div v-if="foundSets.length > 0" class="sets">
@@ -47,7 +48,7 @@
                     <td v-for="(card, col) in cardsOnBoard[str-1]" :data-str="str-1" :data-col="col">
                         <div v-if="card !== null" class="card"
                              title="Выделить карту / Снять выделение"
-                             :class="{selected: card.isSelected}"
+                             :class="{selected: card.isSelected, help: card.help}"
                              @click="selectCard(card, str-1, col)"
                              :data-form="card.form"
                              :data-color="card.color"

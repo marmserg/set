@@ -4,7 +4,9 @@ var app = new Vue({
         deck: [],
         cardsOnBoard: [],
         cardsOnBoardCount: 0,
+        allCardsOnBoard: [],
         selectedCards: [],
+        setsOnBoard: [],
         foundSets: [],
         score: 0,
         cardForms: ['oval', 'romb', 'tilda'],
@@ -22,13 +24,39 @@ var app = new Vue({
             this.checkAll();
         },
         checkAll(){
-            for (let i = 0; i < 3; i++) {
-
+            this.getAllCardsOnBoard();
+            this.setsOnBoard = [];
+            for (let first = 0; first < this.allCardsOnBoard.length - 2; first++) {
+                for (let second = first + 1; second < this.allCardsOnBoard.length - 1; second++) {
+                    for (let third = second + 1; third < this.allCardsOnBoard.length; third++) {
+                        let cards = [this.allCardsOnBoard[first], this.allCardsOnBoard[second], this.allCardsOnBoard[third]]
+                        if (this.isSet(cards)){
+                            this.setsOnBoard.push(cards);
+                        }
+                    }
+                }
+            }
+            console.log(this.setsOnBoard);
+        },
+        getAllCardsOnBoard(){
+            let cards = [];
+            for (let x = 0; x < this.cardsOnBoard.length; x++) {
+                for (let y = 0; y < this.cardsOnBoard[x].length; y++) {
+                    cards.push(this.cardsOnBoard[x][y]);
+                }
+            }
+            this.allCardsOnBoard = cards;
+        },
+        showSet(){
+            for (let i = 0; i < this.setsOnBoard[0].length; i++) {
+                this.setsOnBoard[0][i].help = true;
             }
         },
         makeDeck(){
             this.deck = [];
             this.cardsOnBoard = [];
+            this.cardsOnBoardCount = 0;
+            this.setsOnBoard = [];
             for (let cardFormIndex = 0; cardFormIndex < this.cardForms.length; ++cardFormIndex) {
                 for (let cardColorIndex = 0; cardColorIndex < this.cardColors.length; ++cardColorIndex) {
                     for (let cardShadingIndex = 0; cardShadingIndex < this.cardShading.length; ++cardShadingIndex) {
@@ -41,6 +69,7 @@ var app = new Vue({
                                 isSelected: false,
                                 x: null,
                                 y: null,
+                                help: false,
                                 class: "icon-" + this.cardForms[cardFormIndex] + "-" + this.cardShading[cardShadingIndex]
                             });
                         }
@@ -62,6 +91,7 @@ var app = new Vue({
                 for (let x = 0; x < 3; x++) {
                     this.dealCardOnBoard(x, y);
                 }
+                this.checkAll();
             }
         },
         dealCardOnBoard(x, y){
@@ -103,6 +133,7 @@ var app = new Vue({
             }
             this.foundSets.unshift(setCards);
             this.score++;
+            this.checkAll();
         },
         clearSelected(){
             for (let i = 0; i < this.selectedCards.length; i++) {
