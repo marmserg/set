@@ -1,0 +1,112 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+ul,li{
+    list-style: none;
+}
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.sidebar{
+    width: 20%;
+    padding: 50px;
+}
+.board{
+    width: 80%;
+    height: 550px;
+    padding: 50px;
+}
+.deck{
+    margin: 50px 0;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+}
+.deck .bg{
+    width: 100px;
+    height: 130px;
+    border-radius: 5px;
+    background-color: #dbcaf7;
+    background-image: url(../images/back.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+.card{
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 3px;
+    padding: 10px 0;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+    cursor: pointer;
+}
+.card.selected{
+    box-shadow: inset 0 0 20px #e1c12d;
+}
+.card .icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 120px;
+    font-size: 30px;
+}
+
+
+.decklist .cards{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.sets{
+    width: 100%;
+}
+.sets ul.set{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.card.small{
+    width: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 5px 0;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+    cursor: default;
+}
+.card.small .icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 60px;
+    font-size: 15px;
+}
+
+.blue{
+    color: #4e8dff;
+}
+.red{
+    color: #ff7373;
+}
+.green{
+    color: #48b548;
+}

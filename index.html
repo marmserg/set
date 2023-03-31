@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-01</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icons.css">
+</head>
+<body>
+<div id="app">
+    <div class="wrapper">
+        <div class="sidebar">
+            <button @click="startGame">Начать</button>
+            <div v-if="deck.length > 0"
+                 class="deck"
+                 @click="dealMore"
+                 title="Раздать еще 3 карты">
+                <div class="bg"></div>
+            </div>
+            <div v-if="deck.length > 0" class="info">
+                <p>Осталось карт: {{ deck.length }}</p>
+                <p>Карт на столе: {{ cardsOnBoardCount }}</p>
+                <p>Набрано очков: {{ score }}</p>
+            </div>
+            <div v-if="foundSets.length > 0" class="sets">
+                <p>Найденные сеты:</p>
+                <ul v-for="set in foundSets" class="set">
+                    <li v-for="card in set">
+                        <div class="card small">
+                            <div class="icons" :class="card.color">
+                                <div v-for="i in card.number"
+                                     :class="card.class">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div v-if="cardsOnBoard.length > 0" class="board">
+            <table class="cards">
+                <tr v-for="str in 3">
+                    <td v-for="(card, col) in cardsOnBoard[str-1]" :data-str="str-1" :data-col="col">
+                        <div v-if="card !== null" class="card"
+                             title="Выделить карту / Снять выделение"
+                             :class="{selected: card.isSelected}"
+                             @click="selectCard(card, str-1, col)"
+                             :data-form="card.form"
+                             :data-color="card.color"
+                             :data-shading="card.shading"
+                             :data-number="card.number">
+                            <div class="icons" :class="card.color">
+                                <div v-for="i in card.number"
+                                     :class="card.class">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+<!--    <div v-if="deck.length > 0" class="decklist">-->
+<!--        <ul class="cards">-->
+<!--            <li v-for="card in deck"-->
+<!--                class="card"-->
+<!--                :data-form="card.form.name"-->
+<!--                :data-color="card.color.name"-->
+<!--                :data-shading="card.shading.name"-->
+<!--                :data-number="card.number">-->
+<!--                <div class="icons" :class="card.color.class">-->
+<!--                    <div v-for="icon in card.number"-->
+<!--                         :class="card.class">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+</div>
+
+
+<script src="/main.js"></script>
+</body>
+</html>
