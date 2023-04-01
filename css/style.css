@@ -6,24 +6,27 @@
 ul,li{
     list-style: none;
 }
+p{
+    margin-bottom: 10px;
+}
 
 .wrapper{
-    width: 100%;
+    width: 1200px;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 .sidebar{
-    width: 20%;
+    width: 250px;
     padding: 50px;
 }
 .board{
-    width: 80%;
     height: 550px;
-    padding: 50px;
+    padding: 100px 50px 50px 0;
 }
 .deck{
-    margin: 50px 0;
+    margin: 0 0 30px;
     width: 100px;
     display: flex;
     justify-content: center;
@@ -54,7 +57,7 @@ ul,li{
     cursor: pointer;
 }
 .card.selected{
-    box-shadow: inset 0 0 20px #e1c12d;
+    box-shadow: inset 0 0 20px #4ab31f;
 }
 .card.help{
     box-shadow: inset 0 0 20px #f7ab5d;
@@ -69,14 +72,12 @@ ul,li{
     font-size: 30px;
 }
 
-
 .decklist .cards{
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
 }
-
 .sets{
     width: 100%;
 }
@@ -102,6 +103,16 @@ ul,li{
     flex-direction: column;
     height: 60px;
     font-size: 15px;
+}
+.btn{
+    width: 100px;
+    margin-bottom: 20px;
+    background-color: #4e8dff;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .blue{

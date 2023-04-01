@@ -14,17 +14,22 @@
 <div id="app">
     <div class="wrapper">
         <div class="sidebar">
-            <button @click="startGame">Начать</button>
+            <button class="btn" @click="startGame">Начать</button>
             <div v-if="deck.length > 0"
                  class="deck"
                  @click="dealMore"
                  title="Раздать еще 3 карты">
                 <div class="bg"></div>
             </div>
-            <div v-if="deck.length > 0" class="info">
-                <p>Осталось карт: {{ deck.length }}</p>
+            <div v-if="cardsOnBoard.length > 0" class="info">
+                <p>Карт в колоде: {{ deck.length }}</p>
                 <p>Карт на столе: {{ cardsOnBoardCount }}</p>
-                <p @click="showSet">Сетов на столе: {{ setsOnBoard.length }}</p>
+                <button v-if="setsOnBoard.length > 0"
+                        class="btn"
+                        @click="showSet" :title="'Сетов на столе: ' + setsOnBoard.length + '. Нажмите, чтобы показать подсказку'">Подсказка</button>
+                <button v-else
+                        class="btn"
+                        :title="'Сетов на столе нет!'">Подсказка</button>
                 <p>Набрано очков: {{ score }}</p>
             </div>
             <div v-if="foundSets.length > 0" class="sets">
@@ -65,25 +70,6 @@
             </table>
         </div>
     </div>
-
-
-<!--    <div v-if="deck.length > 0" class="decklist">-->
-<!--        <ul class="cards">-->
-<!--            <li v-for="card in deck"-->
-<!--                class="card"-->
-<!--                :data-form="card.form.name"-->
-<!--                :data-color="card.color.name"-->
-<!--                :data-shading="card.shading.name"-->
-<!--                :data-number="card.number">-->
-<!--                <div class="icons" :class="card.color.class">-->
-<!--                    <div v-for="icon in card.number"-->
-<!--                         :class="card.class">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
 </div>
 
 

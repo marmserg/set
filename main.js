@@ -14,8 +14,6 @@ var app = new Vue({
         cardShading: ['fill', 'bar', 'line'],
         cardNumbers: 3,
     },
-    computed: {
-    },
     methods: {
         startGame(){
             this.makeDeck();
@@ -36,20 +34,29 @@ var app = new Vue({
                     }
                 }
             }
-            console.log(this.setsOnBoard);
+            if (this.deck.length === 0 && this.setsOnBoard.length === 0){
+                this.gameOver();
+            }
+        },
+        gameOver(){
+            alert("Игра окончена! Вы набрали " + this.score + " очков.\n Поздравляем!")
         },
         getAllCardsOnBoard(){
             let cards = [];
             for (let x = 0; x < this.cardsOnBoard.length; x++) {
                 for (let y = 0; y < this.cardsOnBoard[x].length; y++) {
-                    cards.push(this.cardsOnBoard[x][y]);
+                    if (this.cardsOnBoard[x][y] !== null){
+                        cards.push(this.cardsOnBoard[x][y]);
+                    }
                 }
             }
             this.allCardsOnBoard = cards;
         },
         showSet(){
-            for (let i = 0; i < this.setsOnBoard[0].length; i++) {
-                this.setsOnBoard[0][i].help = true;
+            if (this.setsOnBoard[0].length > 0){
+                for (let i = 0; i < this.setsOnBoard[0].length; i++) {
+                    this.setsOnBoard[0][i].help = true;
+                }
             }
         },
         makeDeck(){
@@ -57,6 +64,11 @@ var app = new Vue({
             this.cardsOnBoard = [];
             this.cardsOnBoardCount = 0;
             this.setsOnBoard = [];
+            this.allCardsOnBoard = [];
+            this.selectedCards = [];
+            this.foundSets = [];
+            this.score = 0;
+
             for (let cardFormIndex = 0; cardFormIndex < this.cardForms.length; ++cardFormIndex) {
                 for (let cardColorIndex = 0; cardColorIndex < this.cardColors.length; ++cardColorIndex) {
                     for (let cardShadingIndex = 0; cardShadingIndex < this.cardShading.length; ++cardShadingIndex) {
@@ -100,6 +112,7 @@ var app = new Vue({
             this.cardsOnBoardCount++;
         },
         selectCard(card, x, y){
+            card.help = false;
             card.isSelected = !card.isSelected;
             if (card.isSelected){
                 card.x = x;
@@ -114,9 +127,14 @@ var app = new Vue({
                         }
                     }
                     else {
-                        window.alert("Это не сет!");
                         this.clearSelected();
-                        if (this.score > 0) this.score--;
+                        if (this.score > 0){
+                            window.alert("Это не сет!\nВы потеряли 1 очко.");
+                            this.score--;
+                        }
+                        else{
+                            window.alert("Это не сет!");
+                        }
                     }
                 }
             }
