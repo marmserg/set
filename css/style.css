@@ -113,8 +113,11 @@ p{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: all .3s ease;
 }
-
+.btn:hover{
+    background-color: #1a4fb1;
+}
 .blue{
     color: #4e8dff;
 }
